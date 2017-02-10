@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author xiaofei
@@ -21,7 +26,7 @@ public class GetChannel {
 
         channel = new RandomAccessFile("data.txt", "rw").getChannel();
         channel.position(channel.size());
-        channel.write(ByteBuffer.wrap("more text".getBytes()));
+        channel.write(ByteBuffer.wrap("more text".getBytes("utf-8")));
         channel.close();
 
         channel = new FileInputStream("data.txt").getChannel();
@@ -29,8 +34,15 @@ public class GetChannel {
         channel.read(buffer);
         buffer.flip();
 
-        while (buffer.hasRemaining()) {
-            System.out.print((char) buffer.get());
-        }
+//        while (buffer.hasRemaining()) {
+//            System.out.print((char) buffer.get());
+//        }
+        // doesn't work
+        System.out.println(buffer.asCharBuffer());
+
+        buffer.rewind();
+        String encoding = System.getProperty("file.encoding");
+        System.out.println(Charset.forName(encoding).decode(buffer));
+
     }
 }
