@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -42,7 +43,7 @@ public class GetChannel {
 
         buffer.rewind();
         String encoding = System.getProperty("file.encoding");
+        System.out.println(encoding);
         System.out.println(Charset.forName(encoding).decode(buffer));
-
     }
 }
