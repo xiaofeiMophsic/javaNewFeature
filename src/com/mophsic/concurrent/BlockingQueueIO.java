@@ -10,5 +10,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class BlockingQueueIO {
     public static void main(String[] args) {
+
     }
 }
